@@ -6,6 +6,7 @@ const plus = document.getElementById("plus")
 const heart = document.getElementById("heart")
 const pause = document.getElementById("pause")
 const commentForm = document.getElementsByTagName("form")
+// let currentNumber = parseInt(counter.innerText)
 
 // Counter
 
@@ -71,26 +72,53 @@ heart.addEventListener("click", () => {
     if (currentLi) {
         //create array from string, isolate 3rd item, then set numoflikes to equal that index
         // then add 1 when interpolate
-        let htmlArray;
-        currentLi.innerHTML
-        let numberOfLikes;
+        let htmlArray = currentLi.innerHTML.split(' ')
+        console.log(currentLi)
+        let numberOfLikes = parseInt(htmlArray[2]) + 1;
         currentLi.innerHTML = `${currentNum} has ${numberOfLikes} likes`
-        console.log(htmlArray)
     } else {
-        let numberOfLikes = 1;
         const likesList = document.querySelector(".likes")
         const newLi = document.createElement("li")
-        newLi.innerHTML = `${currentNum} has ${numberOfLikes} likes`
+        newLi.innerHTML = `${currentNum} has 1 like`
         newLi.id = currentNum
         likesList.appendChild(newLi)
     }
 
-    // Assign HTML ID of currenNum to Li
-    // How do we call Li to see if it exists? 
-    // if ()
+    // event listerner on the heart element 
+    // declaring current number in the counter, parse int turning string into a number, 
+    // declaring current li variable, setting that to the current number on the counter, theres a change of there not being a current node with the elementID of currentNum
 
 })
 
 
 
-// Comment
+
+
+
+
+
+
+// define a heart counter, do we need to reset value or use the number stored to that value
+// we want to count how many times heart button is clicked, 
+
+
+// every time heart is clicked, add 1 to that 
+
+// let heartCounter = 0
+// let currentLi = document.getElementById(`${currentNumber}`)
+
+// // debugger
+// heart.addEventListener("click", () => {
+//     heartCounter += 1
+//     // we need to check if currentNum === previousNum
+
+
+//     console.log(parseInt(counter.innerText))
+//     console.log("current number value" + currentNumber)
+//     console.log("heart counter number" + heartCounter)
+// })
+// we need to compare if currentNum === previousNum
+// need to know what current number is, we need to keep track of 
+
+// reset the heartCounter each time currentNum changes
+// })
