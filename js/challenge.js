@@ -5,8 +5,10 @@ const minus = document.getElementById("minus")
 const plus = document.getElementById("plus")
 const heart = document.getElementById("heart")
 const pause = document.getElementById("pause")
-const commentForm = document.getElementsByTagName("form")
-// let currentNumber = parseInt(counter.innerText)
+const formInput = document.querySelector("#comment-input")
+const submitButton = document.getElementById("submit")
+let divList = document.getElementById("list")
+
 
 // Counter
 
@@ -26,7 +28,7 @@ function startCounter() {
 }
 
 //Pause and resume counter
-let ifPaused = false
+
 
 pause.addEventListener("click", () => {
     if (!!intervalRunning) {
@@ -34,13 +36,11 @@ pause.addEventListener("click", () => {
         intervalId = null;
         intervalRunning = false;
         pause.innerText = "resume"
-        ifPaused = true
         disableButtons()
     } else {
-        ifPaused = false
         initCounter()
         pause.innerText = "pause"
-
+        disableButtons()
     }
 })
 
@@ -49,19 +49,18 @@ initCounter();
 // Disable buttons when pause button is clicked
 function disableButtons() {
     const buttons = document.querySelectorAll("button")
-    console.log("From inside disablebuttons callback" + ifPaused)
-
     buttons.forEach(element => {
-        if (ifPaused === true) {
+        if (!intervalRunning) {
             if (element.id != "pause") {
                 element.disabled = true
             }
         } else {
             element.disabled = false
-            console.log("Turning buttons back on")
         }
     })
 }
+
+//
 
 // Plus and minus buttons
 
@@ -87,7 +86,6 @@ heart.addEventListener("click", () => {
         //create array from string, isolate 3rd item, then set numoflikes to equal that index
         // then add 1 when interpolate
         let htmlArray = currentLi.innerHTML.split(' ')
-        console.log(currentLi)
         let numberOfLikes = parseInt(htmlArray[2]) + 1;
         currentLi.innerHTML = `${currentNum} has ${numberOfLikes} likes`
     } else {
@@ -104,7 +102,26 @@ heart.addEventListener("click", () => {
 
 })
 
+// Comments
 
+
+
+// 
+// event listener on the submit button
+// when click on submit, then take comment form value
+// innerText appendChild to list ID div
+
+
+
+
+
+
+submitButton.addEventListener("click", (event) => {
+    let p = document.createElement("p")
+    divList.append(formInput.value, p)
+    event.preventDefault();
+    formInput.value = ""
+})
 
 
 
