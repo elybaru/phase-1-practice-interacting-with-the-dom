@@ -26,6 +26,7 @@ function startCounter() {
 }
 
 //Pause and resume counter
+let ifPaused = false
 
 pause.addEventListener("click", () => {
     if (!!intervalRunning) {
@@ -33,11 +34,13 @@ pause.addEventListener("click", () => {
         intervalId = null;
         intervalRunning = false;
         pause.innerText = "resume"
+        ifPaused = true
         disableButtons()
     } else {
-        console.log("start running")
+        ifPaused = false
         initCounter()
         pause.innerText = "pause"
+
     }
 })
 
@@ -46,7 +49,18 @@ initCounter();
 // Disable buttons when pause button is clicked
 function disableButtons() {
     const buttons = document.querySelectorAll("button")
-    console.log(buttons)
+    console.log("From inside disablebuttons callback" + ifPaused)
+
+    buttons.forEach(element => {
+        if (ifPaused === true) {
+            if (element.id != "pause") {
+                element.disabled = true
+            }
+        } else {
+            element.disabled = false
+            console.log("Turning buttons back on")
+        }
+    })
 }
 
 // Plus and minus buttons
